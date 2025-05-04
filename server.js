@@ -17,7 +17,8 @@ app.use(express.json()); // מאפשר לשרת לקרוא JSON בבקשות POS
 app.use(cors()); // מאפשר גישה מ-Frontend
 
 // ✅ ראוטים
-
+module.exports = serverless(app);
+const serverless = require("serverless-http");
 app.use("/users", userRoutes);
 
 // ✅ בדיקת קונסולה
@@ -34,6 +35,8 @@ app.get("/", (req, res) => {
   res.send("Welcome to DeliZariz Backend!");
 });
 
+// זה העטיפה!
+
 // ✅ הרצת השרת
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
