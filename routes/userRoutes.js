@@ -119,6 +119,20 @@ router.delete("/delete", authMiddleware, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+router.delete("/:id", authMiddleware, async (req, res) => {
+  try {
+    if (req.user.userType !== "admin")
+      return res.status(403).json({ message: "Access denied" });
+
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    if (!deletedUser)
+      return res.status(404).json({ message: "User not found" });
+
+    res.json({ message: `User ${deletedUser.username} deleted` });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // 🟡 עדכון משתמש מחובר
 router.put("/update", authMiddleware, async (req, res) => {
