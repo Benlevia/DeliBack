@@ -106,19 +106,7 @@ router.post("/login", async (req, res) => {
 });
 
 // 🟡 מחיקת משתמש מחובר
-router.delete("/delete", authMiddleware, async (req, res) => {
-  try {
-    const userId = req.user.id;
 
-    const deletedUser = await User.findByIdAndDelete(userId);
-    if (!deletedUser)
-      return res.status(404).json({ message: "User not found" });
-
-    res.status(200).json({ message: "User deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
 router.delete("/:id", authMiddleware, async (req, res) => {
   try {
     if (req.user.userType !== "admin")
