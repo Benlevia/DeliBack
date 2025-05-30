@@ -14,7 +14,13 @@ const app = express();
 
 // ✅ שימוש במידלוורים לפני הראוטים
 app.use(express.json()); // מאפשר לשרת לקרוא JSON בבקשות POST
-app.use(cors()); // מאפשר גישה מ-Frontend
+
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+  })
+);
 
 // ✅ ראוטים
 app.get("/", (req, res) => {
