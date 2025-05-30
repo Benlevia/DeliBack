@@ -13,9 +13,10 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 // 🟢 רישום משתמש חדש
 router.post("/register", async (req, res) => {
+  console.log("Received registration request:", req.body);
   try {
-    const { username, password, email, userType } = req.body;
-
+    const { username, password, email, phone, userType } = req.body;
+    console.log(req.body);
     // בדיקה אם כל השדות קיימים
     if (!username || !password || !email) {
       return res
@@ -37,6 +38,7 @@ router.post("/register", async (req, res) => {
       username,
       password: hashedPassword,
       email,
+      phone,
       userType: userType || "customer", // ברירת מחדל
     });
 
