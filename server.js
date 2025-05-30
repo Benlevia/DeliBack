@@ -21,6 +21,7 @@ app.get("/", (req, res) => {
   res.send("Welcome to DeliZariz Backend!");
 });
 
+app.set("trust proxy", 1); // trust first proxy
 app.use("/users", userRoutes);
 
 // ✅ בדיקת קונסולה
